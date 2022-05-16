@@ -40,7 +40,7 @@ final class IsValidHostTest extends TestCase
      *
      * @return array
      */
-    public function dataValidHost()
+  public function dataValidHost()
     {
         return [
             'localhost'                 => ['localhost'],
@@ -50,6 +50,16 @@ final class IsValidHostTest extends TestCase
             'Domain: mixed case'        => ['Example.Com'],
             'Domain: with dash'         => ['my-example.com'],
             'Domain: with subdomain'    => ['smtp.gmail.com'],
+            'Domain: empty host with domain, syntatically correct' => ['.example.com'],
+            'Host: starts with digit'   => ['3com'],
+            'Host: not an IP address'   => ['1.2.3.com'],
+            'Host: ends with digit'     => ['Take5'],
+            'Host: xn-compliant'        => ['xn--mnchen-3ya'],
+            'Host: ends with dash'      => ['normally-invalid-dns-name-'],
+            'Host: starts with dash'    => ['-valid-hostname'],
+            'Host: has underscore'      => ['valid_in_ms_hosts'],
+            'Host: starts with undersc' => ['_dockerhost'],
+            'Host: has umluats'         => ['münchen.de'],
             'IPv4 address: 127.0.0.1'   => ['127.0.0.1'],
             'IPv4 address: external'    => ['27.145.58.181'],
             'Long hex address'          => [trim(str_repeat('a0123456789.', 21), '.')],
@@ -85,8 +95,10 @@ final class IsValidHostTest extends TestCase
             'Invalid type: object'                      => [new \stdClass()],
             'Invalid type: array'                       => [[]],
             'Invalid input: empty string'               => [''],
-            'Invalid input: domain - empty subdomain'   => ['.example.com'],
-            'Invalid input: domain - with underscore'   => ['my_example.com'],
+         ## 'Invalid input: domain - empty subdomain'   => ['.example.com'],
+         ## 'Invalid input: domain - with underscore'   => ['my_example.com'],
+         ## 'Invalid input: host - ends with dash'      => ['invalid-dns-name-'],
+         ## 'Invalid input: host - contains %'          => ['url-encoded%2Fpath'],
             'Invalid input: IPv4, no dots'              => ['127001'],
             'Invalid input: IPv4, too few groups'       => ['168.0.001'],
             'Invalid input: IPv4, too many groups'      => ['22.55.14.73.9'],
