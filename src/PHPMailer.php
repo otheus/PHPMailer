@@ -4092,7 +4092,10 @@ class PHPMailer
             empty($host)
             || !is_string($host)
             || strlen($host) > 256
-            || !preg_match('/^(\S+)$/u', $host)
+            || (extension_loaded('mbstring') ? 
+                  mb_ereg('[^[:graph:]]', $host) :
+                  preg_match('/[^[:graph:]]/u', $host) 
+               )
         ) {
             return false;
         }
