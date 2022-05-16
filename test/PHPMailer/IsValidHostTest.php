@@ -67,7 +67,7 @@ final class IsValidHostTest extends TestCase
             'Bracketed IPv6'            => ['[0:1234:dc0:41:216:3eff:fe67:3e01]'],
             'Bracketed IPv6 uppercase'  => ['[0:1234:DC0:41:216:3EFF:FE67:3E01]'],
             'Unbracketed IPv6: TODO'    => ['0:1234:dc0:41:216:3eff:fe67:3e01'],
-            'Bracketed IPv6 empty: TODO'=> ['[]'],
+            'Bracketed IPv6 empty:TODO' => ['[]'],
 
         ];
     }
