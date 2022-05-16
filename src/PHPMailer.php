@@ -2117,7 +2117,7 @@ class PHPMailer
             //If it's not specified, the default value is used
 
             //Check the host name is a valid name or IP address before trying to use it
-            if (!static::isValidEmailHost($hostinfo[2])) {
+            if (!static::isValidHost($hostinfo[2])) {
                 $this->edebug($this->lang('invalid_host') . ' ' . $hostinfo[2]);
                 continue;
             }
