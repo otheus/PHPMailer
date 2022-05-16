@@ -4109,7 +4109,6 @@ class PHPMailer
             //Is it a valid IPv4 address?
             return filter_var($host, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4) !== false;
         }
-        
         return true;
     }
 
