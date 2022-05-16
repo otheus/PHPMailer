@@ -40,7 +40,7 @@ final class IsValidHostTest extends TestCase
      *
      * @return array
      */
-  public function dataValidHost()
+    public function dataValidHost()
     {
         return [
             'localhost'                 => ['localhost'],
