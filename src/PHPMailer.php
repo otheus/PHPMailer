@@ -2117,7 +2117,7 @@ class PHPMailer
             //If it's not specified, the default value is used
 
             //Check the host name is a valid name or IP address before trying to use it
-            if (!static::isValidHost($hostinfo[2])) {
+            if (!static::isValidEmailHost($hostinfo[2])) {
                 $this->edebug($this->lang('invalid_host') . ' ' . $hostinfo[2]);
                 continue;
             }
@@ -4077,8 +4077,10 @@ class PHPMailer
 
     /**
      * Validate whether a string contains a valid value to use as a hostname or IP address.
-     * IPv6 addresses must include [], e.g. `[::1]`, not just `::1`.
-     *
+     * IPv6 addresses must include [], e.g. `[::1]`, not just `::1`.  
+     * Hostnames may be one or more non-whitespace UTF-8 characters. Let the resolver sort
+     * out whether it's really a good name or not.
+     * 
      * @param string $host The host name or IP address to check
      *
      * @return bool
@@ -4090,7 +4092,7 @@ class PHPMailer
             empty($host)
             || !is_string($host)
             || strlen($host) > 256
-            || !preg_match('/^([a-zA-Z\d.-]*|\[[a-fA-F\d:]+\])$/', $host)
+            || !preg_match('/^(\S+)$/u', $host)
         ) {
             return false;
         }
@@ -4104,12 +4106,8 @@ class PHPMailer
             //Is it a valid IPv4 address?
             return filter_var($host, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4) !== false;
         }
-        if (filter_var('http://' . $host, FILTER_VALIDATE_URL) !== false) {
-            //Is it a syntactically valid hostname?
-            return true;
-        }
-
-        return false;
+        
+        return true;
     }
 
     /**
