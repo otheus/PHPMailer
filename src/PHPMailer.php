@@ -4077,10 +4077,10 @@ class PHPMailer
 
     /**
      * Validate whether a string contains a valid value to use as a hostname or IP address.
-     * IPv6 addresses must include [], e.g. `[::1]`, not just `::1`.  
+     * IPv6 addresses must include [], e.g. `[::1]`, not just `::1`.
      * Hostnames may be one or more non-whitespace UTF-8 characters. Let the resolver sort
      * out whether it's really a good name or not.
-     * 
+     *
      * @param string $host The host name or IP address to check
      *
      * @return bool
@@ -4092,9 +4092,9 @@ class PHPMailer
             empty($host)
             || !is_string($host)
             || strlen($host) > 256
-            || (extension_loaded('mbstring') ? 
+            || (extension_loaded('mbstring') ?
                   mb_ereg('[^[:graph:]]', $host) :
-                  preg_match('/[^[:graph:]]/u', $host) 
+                  preg_match('/[^[:graph:]]/u', $host)
                )
         ) {
             return false;
